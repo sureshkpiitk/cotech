@@ -77,7 +77,7 @@ class ReqBody(BaseModel):
 
 @app.post("/")
 def _query(file: UploadFile = None, query=Body(...)):
-    data: ReqBody = json.loads(query)
+    data: ReqBody = ReqBody(**json.loads(query))
     if not data.chat_id:
         data.chat_id = str(uuid.uuid4())
     yt_link = None
